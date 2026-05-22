@@ -1,4 +1,12 @@
+import {
+  LayoutDashboard,
+  BarChart3,
+  ShoppingCart,
+  Users,
+  Package,
+} from "lucide-react";
 import StatCard from "@/components/ui/stat-card";
+import RevenueChart from "@/components/ui/revenue-chart";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -6,35 +14,42 @@ export default function Home() {
         
         {/* Sidebar */}
         <aside className="w-64 min-h-screen border-r border-slate-800 p-6">
-          <h1 className="text-2xl font-bold mb-10">
+          <h1 className="text-3xl font-bold tracking-tight mb-10">
             StorePulse AI
           </h1>
 
-          <nav className="space-y-4">
-            <div className="text-slate-300 hover:text-white cursor-pointer">
-              Dashboard
-            </div>
+          <nav className="space-y-3">
 
-            <div className="text-slate-300 hover:text-white cursor-pointer">
-              Analytics
-            </div>
+  <div className="flex items-center gap-3 text-white bg-slate-800 px-4 py-3 rounded-xl cursor-pointer">
+    <LayoutDashboard size={18} />
+    <span>Dashboard</span>
+  </div>
 
-            <div className="text-slate-300 hover:text-white cursor-pointer">
-              Orders
-            </div>
+  <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+    <BarChart3 size={18} />
+    <span>Analytics</span>
+  </div>
 
-            <div className="text-slate-300 hover:text-white cursor-pointer">
-              Customers
-            </div>
+  <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+    <ShoppingCart size={18} />
+    <span>Orders</span>
+  </div>
 
-            <div className="text-slate-300 hover:text-white cursor-pointer">
-              Products
-            </div>
-          </nav>
+  <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+    <Users size={18} />
+    <span>Customers</span>
+  </div>
+
+  <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+    <Package size={18} />
+    <span>Products</span>
+  </div>
+
+</nav>
         </aside>
 
         {/* Main Content */}
-        <section className="flex-1 p-8">
+        <section className="flex-1 p-10 bg-gradient-to-b from-slate-950 to-slate-900">
           
           {/* Top Bar */}
           <div className="flex justify-between items-center mb-10">
@@ -80,6 +95,7 @@ export default function Home() {
     positive={false}
   />
 </div>
+<RevenueChart />
         </section>
       </div>
     </main>
