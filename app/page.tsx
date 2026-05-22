@@ -16,8 +16,13 @@ import AITools from "@/components/ui/ai-tools";
 import QuickActions from "@/components/ui/quick-actions";
 import ActivityFeed from "@/components/ui/activity-feed";
 import DashboardView from "@/components/views/dashboard-view";
+import AnalyticsView from "@/components/views/analytics-view";
+import OrdersView from "@/components/views/orders-view";
+import CustomersView from "@/components/views/customers-view";
+import ProductsView from "@/components/views/products-view";
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeView, setActiveView] = useState("dashboard");
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="flex">
@@ -35,8 +40,8 @@ export default function Home() {
           {/* Sidebar */}
           <aside
             className={`fixed lg:static top-0 left-0 z-50 h-screen w-64 bg-slate-950 border-r border-slate-800 p-6 transform transition-transform duration-300 ${sidebarOpen
-                ? "translate-x-0"
-                : "-translate-x-full lg:translate-x-0"
+              ? "translate-x-0"
+              : "-translate-x-full lg:translate-x-0"
               }`}
           >
 
@@ -55,39 +60,73 @@ export default function Home() {
 
             <nav className="space-y-3">
 
-              <div className="flex items-center gap-3 text-white bg-slate-800 px-4 py-3 rounded-xl cursor-pointer">
+              <button
+                onClick={() => setActiveView("dashboard")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition ${activeView === "dashboard"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+              >
                 <LayoutDashboard size={18} />
                 <span>Dashboard</span>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+              <button
+                onClick={() => setActiveView("analytics")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition ${activeView === "analytics"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+              >
                 <BarChart3 size={18} />
                 <span>Analytics</span>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+              <button
+                onClick={() => setActiveView("orders")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition ${activeView === "orders"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+              >
                 <ShoppingCart size={18} />
                 <span>Orders</span>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+              <button
+                onClick={() => setActiveView("customers")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition ${activeView === "customers"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+              >
                 <Users size={18} />
                 <span>Customers</span>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-3 text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-xl cursor-pointer transition">
+              <button
+                onClick={() => setActiveView("products")}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition ${activeView === "products"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  }`}
+              >
                 <Package size={18} />
                 <span>Products</span>
-              </div>
+              </button>
 
             </nav>
           </aside>
         </>
 
         {/* Main Content */}
-       <section className="flex-1 p-10 bg-gradient-to-b from-slate-950 to-slate-900">
-  <DashboardView />
-</section>
+        <section className="flex-1 p-10 bg-gradient-to-b from-slate-950 to-slate-900">
+          {activeView === "dashboard" && <DashboardView />}
+          {activeView === "analytics" && <AnalyticsView />}
+          {activeView === "orders" && <OrdersView />}
+          {activeView === "customers" && <CustomersView />}
+          {activeView === "products" && <ProductsView />}
+        </section>
       </div>
     </main>
   );
