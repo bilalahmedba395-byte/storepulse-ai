@@ -11,6 +11,7 @@ export default function RecentOrders() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [sortOrder, setSortOrder] = useState("default");
 
   useEffect(() => {
 
@@ -36,22 +37,35 @@ export default function RecentOrders() {
 
   }, []);
 
-  const filteredOrders = orders.filter((order) => {
+  const filteredOrders = orders
+  .filter((order) => {
 
-  const matchesSearch =
-    order.customer
-      .toLowerCase()
-      .includes(search.toLowerCase()) ||
-    order.product
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const matchesSearch =
+      order.customer
+        .toLowerCase()
+        .includes(search.toLowerCase()) ||
+      order.product
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
-  const matchesStatus =
-    statusFilter === "All" ||
-    order.status === statusFilter;
+    const matchesStatus =
+      statusFilter === "All" ||
+      order.status === statusFilter;
 
-  return matchesSearch && matchesStatus;
-});
+    return matchesSearch && matchesStatus;
+  })
+  .sort((a, b) => {
+
+    if (sortOrder === "low") {
+      return a.amount - b.amount;
+    }
+
+    if (sortOrder === "high") {
+      return b.amount - a.amount;
+    }
+
+    return 0;
+  });
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mt-8">
 
@@ -82,11 +96,23 @@ export default function RecentOrders() {
     onChange={(e) => setStatusFilter(e.target.value)}
     className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
   >
+
     <option value="All">All</option>
     <option value="Completed">Completed</option>
     <option value="Pending">Pending</option>
     <option value="Refunded">Refunded</option>
+
   </select>
+
+<select
+  value={sortOrder}
+  onChange={(e) => setSortOrder(e.target.value)}
+  className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
+>
+  <option value="default">Sort Amount</option>
+  <option value="low">Low to High</option>
+  <option value="high">High to Low</option>
+</select>
 
 </div>
 
@@ -151,7 +177,7 @@ export default function RecentOrders() {
                   </td>
 
                   <td className="py-4 font-medium">
-                    {order.amount}
+                    ${order.amount}
                   </td>
 
                   <td className="py-4">
