@@ -1,3 +1,4 @@
+import StatCard from "@/components/ui/stat-card";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -53,65 +54,32 @@ export default function Home() {
           </div>
 
           {/* Analytics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-              <p className="text-slate-400 text-sm">
-                Revenue
-              </p>
+         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+  <StatCard
+    title="Revenue"
+    value="$48,240"
+    change="+12.5%"
+  />
 
-              <h3 className="text-3xl font-bold mt-2">
-                $48,240
-              </h3>
+  <StatCard
+    title="Orders"
+    value="1,429"
+    change="+8.2%"
+  />
 
-              <p className="text-green-400 text-sm mt-2">
-                +12.5%
-              </p>
-            </div>
+  <StatCard
+    title="Customers"
+    value="892"
+    change="+5.4%"
+  />
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-              <p className="text-slate-400 text-sm">
-                Orders
-              </p>
-
-              <h3 className="text-3xl font-bold mt-2">
-                1,429
-              </h3>
-
-              <p className="text-green-400 text-sm mt-2">
-                +8.2%
-              </p>
-            </div>
-
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-              <p className="text-slate-400 text-sm">
-                Customers
-              </p>
-
-              <h3 className="text-3xl font-bold mt-2">
-                892
-              </h3>
-
-              <p className="text-green-400 text-sm mt-2">
-                +5.4%
-              </p>
-            </div>
-
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-              <p className="text-slate-400 text-sm">
-                Conversion Rate
-              </p>
-
-              <h3 className="text-3xl font-bold mt-2">
-                3.8%
-              </h3>
-
-              <p className="text-red-400 text-sm mt-2">
-                -1.1%
-              </p>
-            </div>
-
-          </div>
+  <StatCard
+    title="Conversion Rate"
+    value="3.8%"
+    change="-1.1%"
+    positive={false}
+  />
+</div>
         </section>
       </div>
     </main>
