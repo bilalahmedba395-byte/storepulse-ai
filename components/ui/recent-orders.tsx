@@ -10,6 +10,7 @@ export default function RecentOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
   useEffect(() => {
 
@@ -35,11 +36,22 @@ export default function RecentOrders() {
 
   }, []);
 
-  const filteredOrders = orders.filter((order) =>
-  order.customer.toLowerCase().includes(search.toLowerCase()) ||
-  order.product.toLowerCase().includes(search.toLowerCase())
-);
+  const filteredOrders = orders.filter((order) => {
 
+  const matchesSearch =
+    order.customer
+      .toLowerCase()
+      .includes(search.toLowerCase()) ||
+    order.product
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+  const matchesStatus =
+    statusFilter === "All" ||
+    order.status === statusFilter;
+
+  return matchesSearch && matchesStatus;
+});
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mt-8">
 
@@ -55,13 +67,28 @@ export default function RecentOrders() {
           </p>
         </div>
 
-        <input
-  type="text"
-  placeholder="Search orders..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
-/>
+       <div className="flex flex-col md:flex-row gap-3">
+
+  <input
+    type="text"
+    placeholder="Search orders..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
+  />
+
+  <select
+    value={statusFilter}
+    onChange={(e) => setStatusFilter(e.target.value)}
+    className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
+  >
+    <option value="All">All</option>
+    <option value="Completed">Completed</option>
+    <option value="Pending">Pending</option>
+    <option value="Refunded">Refunded</option>
+  </select>
+
+</div>
 
       </div>
 
