@@ -9,6 +9,7 @@ export default function RecentOrders() {
 
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
 
@@ -34,6 +35,11 @@ export default function RecentOrders() {
 
   }, []);
 
+  const filteredOrders = orders.filter((order) =>
+  order.customer.toLowerCase().includes(search.toLowerCase()) ||
+  order.product.toLowerCase().includes(search.toLowerCase())
+);
+
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mt-8">
 
@@ -49,9 +55,13 @@ export default function RecentOrders() {
           </p>
         </div>
 
-        <button className="text-sm text-slate-300 hover:text-white">
-          View All
-        </button>
+        <input
+  type="text"
+  placeholder="Search orders..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm outline-none focus:border-slate-500"
+/>
 
       </div>
 
@@ -94,7 +104,7 @@ export default function RecentOrders() {
 
             <tbody>
 
-              {orders.map((order) => (
+              {filteredOrders.map((order) => (
 
                 <tr
                   key={order.id}
