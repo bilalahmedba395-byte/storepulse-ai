@@ -14,6 +14,7 @@ import RevenueChart from "@/components/ui/revenue-chart";
 import RecentOrders from "@/components/ui/recent-orders";
 import AITools from "@/components/ui/ai-tools";
 import QuickActions from "@/components/ui/quick-actions";
+import ActivityFeed from "@/components/ui/activity-feed";
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
@@ -146,6 +147,7 @@ export default function Home() {
 
             <div>
               <AITools />
+              <ActivityFeed />
             </div>
 
           </div>
