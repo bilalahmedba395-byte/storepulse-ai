@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import StatCard from "@/components/ui/stat-card";
 import RevenueChart from "@/components/ui/revenue-chart";
+import RecentOrders from "@/components/ui/recent-orders";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -96,6 +97,7 @@ export default function Home() {
   />
 </div>
 <RevenueChart />
+<RecentOrders />
         </section>
       </div>
     </main>
