@@ -8,6 +8,7 @@ import {
 import StatCard from "@/components/ui/stat-card";
 import RevenueChart from "@/components/ui/revenue-chart";
 import RecentOrders from "@/components/ui/recent-orders";
+import AITools from "@/components/ui/ai-tools";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -96,8 +97,18 @@ export default function Home() {
     positive={false}
   />
 </div>
-<RevenueChart />
-<RecentOrders />
+<div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-8">
+  
+  <div className="xl:col-span-2">
+    <RevenueChart />
+    <RecentOrders />
+  </div>
+
+  <div>
+    <AITools />
+  </div>
+
+</div>
         </section>
       </div>
     </main>
