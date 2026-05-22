@@ -4,6 +4,7 @@ import {
   Upload,
   RefreshCcw,
 } from "lucide-react";
+import { toast } from "sonner";
 
 const actions = [
   {
@@ -31,7 +32,9 @@ export default function QuickActions() {
         const Icon = action.icon;
 
         return (
-          <button
+          <button onClick={() =>
+  toast.success(`${action.title} triggered`)
+}
             key={action.title}
             className="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:bg-slate-800/40 transition text-left"
           >
